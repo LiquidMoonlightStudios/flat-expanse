@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Flat Expanse Game</title>
+	<style type="text/css">
+		body {
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+<canvas id="game"></canvas>
+<script type="text/javascript">
+(function() {
+var game = document.getElementById("game");
+game.height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+game.width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+
+var ctx = game.getContext("2d");
+draw(ctx);
+
+var x = 0, y = 0;
+var dx = 1, dy = 1;
+
+function draw(ctx) {
+	ctx.fillStyle = "green";
+	ctx.fillRect(x, y, 100, 100);
+	x += dx;
+	y += dy;
+
+	if ((x+100) > game.width || x < 0) {
+		dx *= -1;
+	}
+	if ((y+100) > game.height || y < 0) {
+		dy *= -1
+	}
+
+
+	window.requestAnimationFrame(function () {
+		draw(ctx);
+	})
+}
+
+})()
+</script>
+</body>
+</html>
